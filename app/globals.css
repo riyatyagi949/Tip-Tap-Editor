@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --margin: 1in;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f3f4f6; /* Light gray background to see page contrast */
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* The container for the editor */
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+}
+
+/* This simulates the physical page */
+.ProseMirror {
+  width: var(--page-width);
+  min-height: var(--page-height);
+  padding: var(--margin);
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  outline: none;
+  /* Visual guide for the page break */
+  background-image: linear-gradient(to bottom, transparent 10.9in, #e5e7eb 10.9in, #e5e7eb 11in, transparent 11in);
+  background-size: 100% 11in;
+}
+
+/* Table styling for Legal Docs */
+.ProseMirror table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.ProseMirror td, .ProseMirror th {
+  min-width: 1em;
+  border: 1px solid #ced4da;
+  padding: 3px 5px;
+  vertical-align: top;
+}
+
+@media print {
+  body { background: none; }
+  .editor-container { padding: 0; }
+  .ProseMirror {
+    box-shadow: none;
+    margin: 0;
+    background-image: none;
+  }
 }
